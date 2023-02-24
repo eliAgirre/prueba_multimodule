@@ -1,0 +1,20 @@
+[
+  {
+    "priceId": 4,
+    "brand": {
+      "brandId": 1,
+      "brandDescription": "Zara"
+    },
+    "startDate": "2020-06-15T16:00:00",
+    "endDate": "2020-12-31T23:59:59",
+    "rate": 4,
+    "product": {
+      "producId": 35435,
+      "productName": "Abrigo",
+      "productDescripion": ""
+    },
+    "priority": 1,
+    "price": 38.95,
+    "currency": "EUR"
+  }
+]

@@ -1,0 +1,56 @@
+[
+  {
+    "priceId": 2,
+    "brand": {
+      "brandId": 1,
+      "brandDescription": "Zara"
+    },
+    "startDate": "2020-06-14T15:00:00",
+    "endDate": "2020-06-14T18:30:00",
+    "rate": 2,
+    "product": {
+      "producId": 35435,
+      "productName": "Abrigo",
+      "productDescripion": ""
+    },
+    "priority": 1,
+    "price": 25.45,
+    "currency": "EUR"
+  },
+  {
+    "priceId": 3,
+    "brand": {
+      "brandId": 1,
+      "brandDescription": "Zara"
+    },
+    "startDate": "2020-06-15T00:00:00",
+    "endDate": "2020-06-15T11:00:00",
+    "rate": 3,
+    "product": {
+      "producId": 35435,
+      "productName": "Abrigo",
+      "productDescripion": ""
+    },
+    "priority": 1,
+    "price": 30.5,
+    "currency": "EUR"
+  },
+  {
+    "priceId": 4,
+    "brand": {
+      "brandId": 1,
+      "brandDescription": "Zara"
+    },
+    "startDate": "2020-06-15T16:00:00",
+    "endDate": "2020-12-31T23:59:59",
+    "rate": 4,
+    "product": {
+      "producId": 35435,
+      "productName": "Abrigo",
+      "productDescripion": ""
+    },
+    "priority": 1,
+    "price": 38.95,
+    "currency": "EUR"
+  }
+]

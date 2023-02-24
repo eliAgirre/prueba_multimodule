@@ -1,0 +1,8 @@
+com\inditex\models\Products$ProductsBuilder.class
+com\inditex\models\Prices.class
+com\inditex\models\Products.class
+com\inditex\models\Prices$PricesBuilder.class
+com\inditex\Error$ErrorBuilder.class
+com\inditex\Error.class
+com\inditex\models\Brands.class
+com\inditex\models\Brands$BrandsBuilder.class
