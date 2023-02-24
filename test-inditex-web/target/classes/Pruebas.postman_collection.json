@@ -1,0 +1,205 @@
+{
+	"info": {
+		"_postman_id": "b65c6626-f5e2-40e2-a9d2-a77ae7a1b7ce",
+		"name": "Pruebas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12106668"
+	},
+	"item": [
+		{
+			"name": "Get Test 1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/api/prices/filterByDatesBrandProduct?startDate=2020-06-14-10.00.00&endDate=2020-12-31-23.59.59&brandId=1&productId=35435",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"prices",
+						"filterByDatesBrandProduct"
+					],
+					"query": [
+						{
+							"key": "startDate",
+							"value": "2020-06-14-10.00.00"
+						},
+						{
+							"key": "endDate",
+							"value": "2020-12-31-23.59.59"
+						},
+						{
+							"key": "brandId",
+							"value": "1"
+						},
+						{
+							"key": "productId",
+							"value": "35435"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Test 2",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/api/prices/filterByDatesBrandProduct?startDate=2020-06-14-16.00.00&endDate=2020-12-31-23.59.59&brandId=1&productId=35435",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"prices",
+						"filterByDatesBrandProduct"
+					],
+					"query": [
+						{
+							"key": "startDate",
+							"value": "2020-06-14-16.00.00"
+						},
+						{
+							"key": "endDate",
+							"value": "2020-12-31-23.59.59"
+						},
+						{
+							"key": "brandId",
+							"value": "1"
+						},
+						{
+							"key": "productId",
+							"value": "35435"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Test 3",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/api/prices/filterByDatesBrandProduct?startDate=2020-06-14-21.00.00&endDate=2020-12-31-23.59.59&brandId=1&productId=35435",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"prices",
+						"filterByDatesBrandProduct"
+					],
+					"query": [
+						{
+							"key": "startDate",
+							"value": "2020-06-14-21.00.00"
+						},
+						{
+							"key": "endDate",
+							"value": "2020-12-31-23.59.59"
+						},
+						{
+							"key": "brandId",
+							"value": "1"
+						},
+						{
+							"key": "productId",
+							"value": "35435"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Test 4",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/api/prices/filterByDatesBrandProduct?startDate=2020-06-15-10.00.00&endDate=2020-12-31-23.59.59&brandId=1&productId=35435",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"prices",
+						"filterByDatesBrandProduct"
+					],
+					"query": [
+						{
+							"key": "startDate",
+							"value": "2020-06-15-10.00.00"
+						},
+						{
+							"key": "endDate",
+							"value": "2020-12-31-23.59.59"
+						},
+						{
+							"key": "brandId",
+							"value": "1"
+						},
+						{
+							"key": "productId",
+							"value": "35435"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Test 5",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/api/prices/filterByDatesBrandProduct?startDate=2020-06-16-21.00.00&endDate=2020-12-31-23.59.59&brandId=1&productId=35435",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"prices",
+						"filterByDatesBrandProduct"
+					],
+					"query": [
+						{
+							"key": "startDate",
+							"value": "2020-06-16-21.00.00"
+						},
+						{
+							"key": "endDate",
+							"value": "2020-12-31-23.59.59"
+						},
+						{
+							"key": "brandId",
+							"value": "1"
+						},
+						{
+							"key": "productId",
+							"value": "35435"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
