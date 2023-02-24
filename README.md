@@ -19,11 +19,11 @@ Este proyecto tiene la siguiente estructura:
 
 En este proyecto se ha dispersado las capas que tiene teóricamente la arquitectura hexagonal de forma modularizada, así la lógica del negocio está desacoplada con el exterior. Es decir, si se realiza algún cambio en el exterior no tiene que afectar en la lógica del negocio.
 
-En la capa de infraestructura estarían los módulos `database`, `authentication` y `client`.
+En la **capa de infraestructura** estarían los módulos `database`, `authentication` y `client`.
 
-En la capa de aplicación estaría el módulo `web`.
+En la **capa de aplicación** estaría el módulo `web`.
 
-En la capa del dominio entran los módulos `domain` y `entity`.
+En la **capa del dominio** entran los módulos `domain` y `entity`.
 
 Se ha usado mockito para realizar los tests unitarios desde un fichero json.
 
