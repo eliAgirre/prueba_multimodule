@@ -38,11 +38,6 @@ public class ServiceException extends RuntimeException {
             this.code = code;
         }
 
-        public Builder withMessage(String message) {
-            this.message = "ServiceException: " + message;
-            return this;
-        }
-
         public Builder withHttpStatus(HttpStatus httpStatus) {
             this.httpStatus = httpStatus;
             return this;
