@@ -12,7 +12,7 @@ La arquitectura hexagonal tiene las siguientes capas:
 Este proyecto tiene la siguiente estructura:
 - **client**: es la capa cliente por ejemplo para usar las tablas, payments o shopping externos (en este caso no es necesario).
 - **authentication**: conecta todos los microservicios rest mediante un token, así es más seguro la comunicación (no es el caso, pero sería recomendable, se refuerza la seguridad).
-- **database**: tiene la configuración de las base de datos h2 y se conecta con la base de datos.
+- **database**: se usa los repositorios jpa para realizar consultas a la base de datos en memoria h2.
 - **domain**: es la capa que se encarga de solucionar la lógica de negocio.
 - **entity**: son todas las entidades de la lógica del dominio.
 - **web**: es el starter, el servicio web y la que se conecta con el exterior, por ejemplo, con la parte del front.
