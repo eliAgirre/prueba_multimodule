@@ -15,7 +15,7 @@ Este proyecto tiene la siguiente estructura:
 - **database**: se usa los repositorios jpa para realizar consultas a la base de datos en memoria h2.
 - **domain**: es la capa que se encarga de solucionar la lógica de negocio.
 - **entity**: son todas las entidades de la lógica del dominio.
-- **web**: es el starter, el servicio web y la que se conecta con el exterior, por ejemplo, con la parte del front.
+- **web**: es el starter, el servicio web y tiene la configuración de la base de datos h2 (application.properties).
 
 En este proyecto se ha dispersado las capas que tiene teóricamente la arquitectura hexagonal de forma modularizada, así la lógica del negocio está desacoplada con el exterior. Es decir, si se realiza algún cambio en el exterior no tiene que afectar en la lógica del negocio.
 
