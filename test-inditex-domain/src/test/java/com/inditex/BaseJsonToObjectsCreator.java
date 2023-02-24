@@ -19,11 +19,6 @@ public class BaseJsonToObjectsCreator {
 		return new ObjectMapper().registerModule(new JavaTimeModule()).readValue(file, clazz);
 	}
 
-	protected String getStringFromFile(String resource) throws IOException {
-		File file = FileUtils.toFile(BaseJsonToObjectsCreator.class.getResource(resource));
-		return new String(Files.readAllBytes(Paths.get(file.getAbsolutePath())));
-	}
-
 	protected <T> List<T> getObjectListFromFile(String resource, Class<T> clazz) throws IOException {
 		File file = FileUtils.toFile(BaseJsonToObjectsCreator.class.getResource(resource));
 		ObjectMapper mapper = new ObjectMapper();
