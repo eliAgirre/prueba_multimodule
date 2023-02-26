@@ -44,8 +44,8 @@ class PricesServiceTest {
         mockedBrand = mock(Brands.class);
         mockedProduct = mock(Products.class);
         mockedPricesService = new PricesService(mockedPricesRepository, mockedBrandsServices, mockedProductsService, mockedBrand, mockedProduct);
-        mockedServiceException = getServiceExceptionByErrorCodeAndStatus(ServiceErrorCatalog.GENERIC_SERVICE_ERROR.name(),
-                HttpStatus.BAD_REQUEST, ServiceErrorCatalog.GENERIC_SERVICE_ERROR.getMessage());
+        mockedServiceException = getServiceExceptionByErrorCodeAndStatus(ServiceErrorCatalog.START_DATE_IS_NOT_CORRRECT.name(),
+                HttpStatus.INTERNAL_SERVER_ERROR, ServiceErrorCatalog.START_DATE_IS_NOT_CORRRECT.getMessage());
 
     }
 
@@ -130,22 +130,21 @@ class PricesServiceTest {
     }
 
     @Test
-    void getPricesByStartDateNullAndEndDateNullAndBrandId1AndProductId35435_should_throw_ServiceException() {
+    void getPricesByStartDateNullAndEndDateAndBrandId1AndProductId35435_should_throw_ServiceException() {
         System.out.println(Constants.LOG_SERVICE_TEST_SERVICE_EXCEPTION);
 
         // Given
         mockedPricesService = mock(PricesService.class);
-        LocalDateTime endDate = Utility.getLocalDateTimeFromString(Constants.END_DATE_STRING, Constants.FORMAT_DATE_TIME_YYYY_MM_DD_HH_MM_SS);
-        doThrow(mockedServiceException).when(mockedPricesService).getPricesBetweenDatesAndBrandAndProduct("", "", Constants.BRAND_ID, Constants.PRODUCT_ID);
+        doThrow(mockedServiceException).when(mockedPricesService).getPricesBetweenDatesAndBrandAndProduct(Constants.EMPTY, Constants.END_DATE_STRING, Constants.BRAND_ID, Constants.PRODUCT_ID);
 
         // Then
         ServiceException serviceException = assertThrows(ServiceException.class,
-                () -> mockedPricesService.getPricesBetweenDatesAndBrandAndProduct("", "", Constants.BRAND_ID, Constants.PRODUCT_ID));
+                () -> mockedPricesService.getPricesBetweenDatesAndBrandAndProduct(Constants.EMPTY, Constants.END_DATE_STRING, Constants.BRAND_ID, Constants.PRODUCT_ID));
 
         // Then
         assertNotNull(serviceException);
         assertNotNull(serviceException.getMessage());
-        assertEquals(ServiceErrorCatalog.GENERIC_SERVICE_ERROR.getMessage(), serviceException.getMessage());
+        assertEquals(ServiceErrorCatalog.START_DATE_IS_NOT_CORRRECT.getMessage(), serviceException.getMessage());
         System.out.println();
     }
 

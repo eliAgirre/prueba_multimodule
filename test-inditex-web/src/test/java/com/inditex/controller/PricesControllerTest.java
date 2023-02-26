@@ -171,14 +171,14 @@ public class PricesControllerTest {
     }
 
     @Test
-    void Given_StartDateNullAndEndDateNullAndBrandId1AndProductId35435_When_getPrice_Then_throws_ServiceException() throws ServiceException {
+    void Given_StartDateNullAndEndDateAndBrandId1AndProductId35435_When_getPrice_Then_throws_ServiceException() throws ServiceException {
         System.out.println(Constants.LOG_CONTROLLER_TEST_SERVICE_EXCEPTION);
         // When
-        doThrow(mockedServiceException).when(mockedPricesService).getPricesBetweenDatesAndBrandAndProduct(Constants.EMPTY, Constants.EMPTY,
+        doThrow(mockedServiceException).when(mockedPricesService).getPricesBetweenDatesAndBrandAndProduct(Constants.EMPTY, Constants.END_DATE_STRING,
                 Constants.BRAND_ID, Constants.PRODUCT_ID);
 
         ServiceException serviceException = assertThrows(ServiceException.class, () -> pricesController.getPricesByDatesAndBrandAndProduct(Constants.EMPTY,
-                Constants.EMPTY, Constants.BRAND_ID, Constants.PRODUCT_ID));
+                Constants.END_DATE_STRING, Constants.BRAND_ID, Constants.PRODUCT_ID));
 
         // Then
         assertNotNull(serviceException);
