@@ -17,8 +17,6 @@ import lombok.ToString;
 @Getter
 @Setter
 @RequiredArgsConstructor
-@AllArgsConstructor
-@Builder
 @Entity
 @Component
 @ToString

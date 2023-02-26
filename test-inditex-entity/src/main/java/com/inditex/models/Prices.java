@@ -22,11 +22,9 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Getter
-@Setter
 @ToString
 @RequiredArgsConstructor
 @AllArgsConstructor
-@Builder
 @Entity
 public class Prices implements Serializable {
 

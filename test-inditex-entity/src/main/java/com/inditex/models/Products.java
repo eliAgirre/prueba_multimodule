@@ -18,8 +18,6 @@ import lombok.ToString;
 @Setter
 @ToString
 @RequiredArgsConstructor
-@AllArgsConstructor
-@Builder
 @Component
 @Entity
 public class Products implements Serializable {
