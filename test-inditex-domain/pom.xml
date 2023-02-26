@@ -59,6 +59,12 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- Spring web -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+        </dependency>
+
     </dependencies>
 
     <properties>
