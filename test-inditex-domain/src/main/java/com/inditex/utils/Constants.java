@@ -39,7 +39,7 @@ public final class Constants {
     public static final String LOG_SERVICE_TEST3 = "test3_getPricesAt21ByDate14BrandId1AndProductId35435_should_call_pricesRepository";
     public static final String LOG_SERVICE_TEST4 = "test4_getPricesAt10ByDate15BrandId1AndProductId35435_should_call_pricesRepository";
     public static final String LOG_SERVICE_TEST5 = "test5_getPricesAt21ByDate16BrandId1AndProductId35435_should_call_pricesRepository";
-    public static final String LOG_SERVICE_TEST_SERVICE_EXCEPTION = "getPricesByStartDateNullAndEndDateAndBrandId1AndProductId35435_should_throw_ServiceException";
+    public static final String LOG_SERVICE_TEST_SERVICE_EXCEPTION = "getPricesByStartDateEmptyAndEndDateAndBrandId1AndProductId35435_should_throw_ServiceException";
 
     public static final String LOG_CONTROLLER = "REST filterByDatesBrandProduct startDate {}, endDate {}, brandId {}, productId {} ";
 
@@ -48,6 +48,6 @@ public final class Constants {
     public static final String LOG_CONTROLLER_TEST3 = "Test3_Given_StartDateAt21Date14AndEndDateAndBrandAndProduct_When_getPrices_Then_returns_PricesList";
     public static final String LOG_CONTROLLER_TEST4 = "Test4_Given_StartDateAt10Date15AndEndDateAndBrandAndProduct_When_getPrices_Then_returns_PricesList";
     public static final String LOG_CONTROLLER_TEST5 = "Test5_Given_StartDateAt21Date16AndEndDateAndBrandAndProduct_When_getPrices_Then_returns_PricesList";
-    public static final String LOG_CONTROLLER_TEST_SERVICE_EXCEPTION = "Given_StartDateNullAndEndDateAndBrandId1AndProductId35435_When_getPrice_Then_throws_ServiceException";
+    public static final String LOG_CONTROLLER_TEST_SERVICE_EXCEPTION = "Given_StartDateEmptyAndEndDateAndBrandId1AndProductId35435_When_getPrice_Then_throws_ServiceException";
 
 }

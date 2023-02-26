@@ -130,7 +130,7 @@ class PricesServiceTest {
     }
 
     @Test
-    void getPricesByStartDateNullAndEndDateAndBrandId1AndProductId35435_should_throw_ServiceException() {
+    void getPricesByStartDateEmptyAndEndDateAndBrandId1AndProductId35435_should_throw_ServiceException() {
         System.out.println(Constants.LOG_SERVICE_TEST_SERVICE_EXCEPTION);
 
         // Given

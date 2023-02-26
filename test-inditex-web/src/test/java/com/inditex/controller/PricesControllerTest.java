@@ -171,7 +171,7 @@ public class PricesControllerTest {
     }
 
     @Test
-    void Given_StartDateNullAndEndDateAndBrandId1AndProductId35435_When_getPrice_Then_throws_ServiceException() throws ServiceException {
+    void Given_StartDateEmptyAndEndDateAndBrandId1AndProductId35435_When_getPrice_Then_throws_ServiceException() throws ServiceException {
         System.out.println(Constants.LOG_CONTROLLER_TEST_SERVICE_EXCEPTION);
         // When
         doThrow(mockedServiceException).when(mockedPricesService).getPricesBetweenDatesAndBrandAndProduct(Constants.EMPTY, Constants.END_DATE_STRING,
