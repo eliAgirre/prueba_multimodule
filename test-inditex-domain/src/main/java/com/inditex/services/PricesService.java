@@ -6,7 +6,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -76,38 +75,32 @@ public class PricesService {
                                 .collect(Collectors.toList()));
     }
 
-    public List<Prices> getPricesBetweenDatesAndBrandAndProduct(String startDate, String endDate, int brandId, int productId) {
+    public List<Prices> getPricesBetweenDatesAndBrandAndProduct(String startDate, String endDate, int brandId, int productId) throws ServiceException{
 
-        try {
-            log.info("getPricesBetweenDatesAndBrandAndProduct startDate {} endDate {} brandId {} productId {} ",  startDate, endDate, brandId, productId);
+        log.info(Constants.LOG_SERVICE, startDate, endDate, brandId, productId);
 
-            if (Objects.isNull(startDate)) {
-                throw new ServiceException.Builder(String.valueOf(ServiceErrorCatalog.START_DATE_IS_NOT_CORRRECT))
-                        .withHttpStatus(HttpStatus.BAD_REQUEST).build();
-            }
-            if (Objects.isNull(endDate)) {
-                throw new ServiceException.Builder(String.valueOf(ServiceErrorCatalog.END_DATE_IS_NOT_CORRRECT))
-                        .withHttpStatus(HttpStatus.BAD_REQUEST).build();
-            }
-
-            if (Objects.isNull(brandId)) {
-                throw new ServiceException.Builder(String.valueOf(ServiceErrorCatalog.BRAND_ID_IS_NOT_CORRRECT))
-                        .withHttpStatus(HttpStatus.BAD_REQUEST).build();
-            }
-
-            if (Objects.isNull(productId)) {
-                throw new ServiceException.Builder(String.valueOf(ServiceErrorCatalog.PRODUCT_ID_IS_NOT_CORRRECT))
-                        .withHttpStatus(HttpStatus.BAD_REQUEST).build();
-            }
-
-            LocalDateTime localStartDate = Utility.getLocalDateTimeFromString(startDate, Constants.FORMAT_DATE_TIME_YYYY_MM_DD_HH_MM_SS);
-            LocalDateTime localEndDate = Utility.getLocalDateTimeFromString(endDate, Constants.FORMAT_DATE_TIME_YYYY_MM_DD_HH_MM_SS);
-
-            return pricesRepository.findPricesByStartDateGreaterThanEqualAndEndDateLessThanEqualAndBrandAndProduct(localStartDate, localEndDate, brand, product);
-
-        } catch (Exception e) {
-            log.error(String.format(ServiceErrorCatalog.ERROR_OBTAINING_PRICES+" of startDate %s", startDate), e);
-            return new ArrayList<>();
+        if (Objects.isNull(startDate) || startDate.isEmpty()) {
+            throw new ServiceException.Builder(String.valueOf(ServiceErrorCatalog.START_DATE_IS_NOT_CORRRECT))
+                    .withHttpStatus(HttpStatus.BAD_REQUEST).build();
         }
+        if (Objects.isNull(endDate) || endDate.isEmpty()) {
+            throw new ServiceException.Builder(String.valueOf(ServiceErrorCatalog.END_DATE_IS_NOT_CORRRECT))
+                    .withHttpStatus(HttpStatus.BAD_REQUEST).build();
+        }
+
+        if (Objects.isNull(brandId)) {
+            throw new ServiceException.Builder(String.valueOf(ServiceErrorCatalog.BRAND_ID_IS_NOT_CORRRECT))
+                    .withHttpStatus(HttpStatus.BAD_REQUEST).build();
+        }
+
+        if (Objects.isNull(productId)) {
+            throw new ServiceException.Builder(String.valueOf(ServiceErrorCatalog.PRODUCT_ID_IS_NOT_CORRRECT))
+                    .withHttpStatus(HttpStatus.BAD_REQUEST).build();
+        }
+
+        LocalDateTime localStartDate = Utility.getLocalDateTimeFromString(startDate, Constants.FORMAT_DATE_TIME_YYYY_MM_DD_HH_MM_SS);
+        LocalDateTime localEndDate = Utility.getLocalDateTimeFromString(endDate, Constants.FORMAT_DATE_TIME_YYYY_MM_DD_HH_MM_SS);
+
+        return pricesRepository.findPricesByStartDateGreaterThanEqualAndEndDateLessThanEqualAndBrandAndProduct(localStartDate, localEndDate, brand, product);
     }
 }

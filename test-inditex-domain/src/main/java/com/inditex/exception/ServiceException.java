@@ -16,7 +16,7 @@ public class ServiceException extends RuntimeException {
     private final Map<String, String> params;
     private final Error error;
 
-    private ServiceException(String code, HttpStatus httpStatus, String message, Throwable cause,
+    public ServiceException(String code, HttpStatus httpStatus, String message, Throwable cause,
                              Map<String, String> params) {
         super(message, cause);
         this.code = code;
@@ -40,6 +40,11 @@ public class ServiceException extends RuntimeException {
 
         public Builder withHttpStatus(HttpStatus httpStatus) {
             this.httpStatus = httpStatus;
+            return this;
+        }
+
+        public Builder withMessage(String message) {
+            this.message = message;
             return this;
         }
 
