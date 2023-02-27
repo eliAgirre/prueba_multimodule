@@ -60,6 +60,7 @@ Se ha usado diferentes tipos de json por cada caso para realizar los tests unita
   
   }
   ```
+  Aparte de las anotaciones de JPA la clase `Prices` tiene las anotaciones de Lombok reducir el código repetitivo como `@Getter`, `@ToString`, `@RequiredArgsConstructor` y `@AllArgsConstructor`.
   
   
   ### Domain
