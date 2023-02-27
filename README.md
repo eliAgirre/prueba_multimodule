@@ -148,7 +148,7 @@ Se ha usado diferentes tipos de json por cada caso para realizar los tests unita
   
   ```
   
-  Mediante esta clase se podrá consultar los precios según la fecha de inicio, la fecha de finalización, la marca y el producto. Aquí se tiene el ejemplo de guardar la lista de los precios en la base de datos mediante repositorio de JPA:
+  Mediante esta clase se podrá consultar los precios según la fecha de inicio, la fecha de finalización, la marca y el producto. Aquí se tiene el ejemplo de consultar la lista de los precios en la base de datos mediante repositorio de JPA:
   
   ```java
    public List<Prices> getPricesBetweenDatesAndBrandAndProduct(String startDate, String endDate, int brandId, int productId) throws ServiceException{
