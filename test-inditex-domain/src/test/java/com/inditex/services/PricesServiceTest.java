@@ -5,8 +5,8 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.doThrow;
 
-import com.inditex.exception.ServiceErrorCatalog;
-import com.inditex.exception.ServiceException;
+import org.springframework.http.HttpStatus;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +17,9 @@ import com.inditex.models.Products;
 import com.inditex.repository.PricesRepository;
 import com.inditex.utils.Constants;
 import com.inditex.utils.Utility;
-import org.springframework.http.HttpStatus;
+
+import com.inditex.exception.ServiceErrorCatalog;
+import com.inditex.exception.ServiceException;
 
 class PricesServiceTest {
 
