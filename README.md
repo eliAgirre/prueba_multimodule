@@ -258,6 +258,8 @@ Se ha usado diferentes tipos de json por cada caso para realizar los tests unita
 
 Se han creado los tests para las clases `PricesService` y `PricesController`. Se ha usado para realizar los tests `junit.jupiter` y `mockito`.
 
+### Test en el servicio
+
 En el caso de `PricesServiceTest` se ha creado un método llamado `setUp` para mockear las clases que se instancian en el servicio como `PricesRepository`, `BrandsService`, `ProductsService`, `Brands`, `Products` y `ServiceException`:
 
 ```java
@@ -320,6 +322,84 @@ Otro caso de uso cuando la fecha de inicio sea vacío:
     }
 ```
 
+### Test en el controlador
+
+En el caso del controlador se han utilizado los ficheros json cargados por cada caso que se inyecta con la anotación `@Autowired` y antes de cada test se mockean tanto el servicio como la excepción:
+
+```java
+  public class PricesControllerTest {
+
+    @Autowired
+    private JsonToObjectsCreator json;
+
+    @Mock
+    private PricesService mockedPricesService;
+
+    private PricesController pricesController;
+
+    @Mock
+    private ServiceException mockedServiceException;
+
+    @BeforeEach
+    public void setUp() {
+        openMocks(this);
+        pricesController = new PricesController(mockedPricesService);
+        json = new JsonToObjectsCreator();
+    }
+  }
+```
+
+En uno de los casos unitarios que se obtiene la petición y la respuesta de los ficheros json. Se comprueba si la respuesta no viene nula, si el cuerpo de la respuesta no viene nula, si devuelve el tamaño correspondiente de la lista y si los datos por cada lista las devuelve como es debido:
+
+```java
+    @Test
+    void Test1_Given_StartDateAt10Date14AndEndDateAndBrandAndProduct_When_getPrices_Then_returns_PricesList() throws Exception {
+        System.out.println(Constants.LOG_CONTROLLER_TEST1);
+        // Given
+        PriceRqTest rq1 = json.test1PriceRqAt10Date14();
+        List<Prices> rsList1 = json.test1PriceRsAt10Date14();
+
+        // When
+        when(mockedPricesService.getPricesBetweenDatesAndBrandAndProduct(rq1.getStartDate(), rq1.getEndDate(),
+                                                            rq1.getBrandId(), rq1.getProductId())).thenReturn(rsList1);
+
+        ResponseEntity<List<Prices>> responseEntity = pricesController.getPricesByDatesAndBrandAndProduct(rq1.getStartDate(),
+                                                            rq1.getEndDate(), rq1.getBrandId(), rq1.getProductId());
+        responseEntity.getBody().stream()
+                .map( price -> price.toString() )
+                .forEach(System.out::println);
+        System.out.println();
+
+        // Then
+        assertNotNull(responseEntity);
+        assertNotNull(responseEntity.getBody());
+        assertEquals(rsList1.size(), responseEntity.getBody().size());
+        assertEquals(rsList1.get(0), responseEntity.getBody().get(0));
+        assertEquals(rsList1.get(1), responseEntity.getBody().get(1));
+        assertEquals(rsList1.get(2), responseEntity.getBody().get(2));
+        assertEquals(rsList1.get(3), responseEntity.getBody().get(3));
+        System.out.println();
+    }
+```
+
+Otro caso unitario es cuando la fecha de iniciación es vacía y lanza la excepción `ServiceException`:
+
+```java
+    @Test
+    void Given_StartDateEmptyAndEndDateAndBrandId1AndProductId35435_When_getPrice_Then_throws_ServiceException() throws ServiceException {
+        System.out.println(Constants.LOG_CONTROLLER_TEST_SERVICE_EXCEPTION);
+        // When
+        doThrow(mockedServiceException).when(mockedPricesService).getPricesBetweenDatesAndBrandAndProduct(Constants.EMPTY, Constants.END_DATE_STRING,
+                Constants.BRAND_ID, Constants.PRODUCT_ID);
+
+        ServiceException serviceException = assertThrows(ServiceException.class, () -> pricesController.getPricesByDatesAndBrandAndProduct(Constants.EMPTY,
+                Constants.END_DATE_STRING, Constants.BRAND_ID, Constants.PRODUCT_ID));
+
+        // Then
+        assertNotNull(serviceException);
+        System.out.println();
+    }
+```
 
 ## Lista de dependencias
 
