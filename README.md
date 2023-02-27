@@ -276,6 +276,27 @@ En el caso de `PricesServiceTest` se ha creado un método llamado `setUp` para m
     }
 ```
 
+Ejemplo de un caso unitario cuando la fecha de inicio, la fecha de finalización, la marca id y el producto id tengan un valor concreto:
+
+```java
+
+    @Test
+    void test1_getPricesAt10ByDate14BrandId1AndProductId35435_should_call_pricesRepository() {
+        System.out.println(Constants.LOG_SERVICE_TEST1);
+
+        // Given
+        LocalDateTime startDate = Utility.getLocalDateTimeFromString(Constants.TEST_1_START_DATE_STRING, Constants.FORMAT_DATE_TIME_YYYY_MM_DD_HH_MM_SS);
+        LocalDateTime endDate = Utility.getLocalDateTimeFromString(Constants.END_DATE_STRING, Constants.FORMAT_DATE_TIME_YYYY_MM_DD_HH_MM_SS);
+
+        // When
+        mockedPricesService.getPricesBetweenDatesAndBrandAndProduct(Constants.TEST_1_START_DATE_STRING, Constants.END_DATE_STRING, Constants.BRAND_ID, Constants.PRODUCT_ID);
+
+        // Then
+        verify(mockedPricesRepository).findPricesByStartDateGreaterThanEqualAndEndDateLessThanEqualAndBrandAndProduct(startDate, endDate, mockedBrand, mockedProduct);
+        System.out.println();
+    }
+```
+
 
 ## Lista de dependencias
 
