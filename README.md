@@ -297,6 +297,29 @@ Ejemplo de un caso unitario cuando la fecha de inicio, la fecha de finalización
     }
 ```
 
+Otro caso de uso cuando la fecha de inicio sea vacío:
+
+```java
+    @Test
+    void getPricesByStartDateEmptyAndEndDateAndBrandId1AndProductId35435_should_throw_ServiceException() {
+        System.out.println(Constants.LOG_SERVICE_TEST_SERVICE_EXCEPTION);
+
+        // Given
+        mockedPricesService = mock(PricesService.class);
+        doThrow(mockedServiceException).when(mockedPricesService).getPricesBetweenDatesAndBrandAndProduct(Constants.EMPTY, Constants.END_DATE_STRING, Constants.BRAND_ID, Constants.PRODUCT_ID);
+
+        // Then
+        ServiceException serviceException = assertThrows(ServiceException.class,
+                () -> mockedPricesService.getPricesBetweenDatesAndBrandAndProduct(Constants.EMPTY, Constants.END_DATE_STRING, Constants.BRAND_ID, Constants.PRODUCT_ID));
+
+        // Then
+        assertNotNull(serviceException);
+        assertNotNull(serviceException.getMessage());
+        assertEquals(ServiceErrorCatalog.START_DATE_IS_NOT_CORRRECT.getMessage(), serviceException.getMessage());
+        System.out.println();
+    }
+```
+
 
 ## Lista de dependencias
 
