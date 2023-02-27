@@ -48,9 +48,10 @@ Se ha usado diferentes tipos de json por cada caso para realizar los tests unita
   La entidad `Prices` contiene las anotaciones `@Entity`, `@Id`, `@ManyToOne` y `@JoinColumn` para la persistencia de datos en JPA. La anotación `@Entity` sirve para que la aplicación sepa que es una entidad y que debe crear la tabla según las propiedades que tenga la clase. La anotación `@Id` sirve para definir el id de la clase. La anotación `@ManyToOne` es una relación de mucho a uno (N:1) para que cree en la tabla esa relación con una id de otra entidad mediante la anotación `@JoinColumn`:
   
   ```java
+  @Entity
   public class Prices {
   
-      @Id
+     @Id
     private int priceId;
     
     @ManyToOne
