@@ -29,8 +29,6 @@ Se ha usado mockito para realizar los tests unitarios desde un fichero json.
 
 Los ficheros json están en el módulo `web` en la carpeta `resources` y después en el paquete `json`.
 
-Se ha usado diferentes tipos de json por cada caso para realizar los tests unitarios en la parte del controlador.
-
   ### Relaciones entre los módulos
 
   - **entity**: tiene dependencia de ningún módulo, ya que son las entidades de la lógica del dominio.
