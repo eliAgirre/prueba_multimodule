@@ -113,7 +113,7 @@ Se ha usado diferentes tipos de json por cada caso para realizar los tests unita
         return brandsRepository.save(brand);
     }
   ```
-  La clase `PricesService` tiene inyectado `PricesRepository`, `BrandsService`, `ProductsService`, `Brands` y `Products` en el constructor de la clase. Como en la clase anterior, se está usando la anotación `@PostConstruct` para que se guarden las marca y los productos en sus tablas correspondientes, y la lista de los precios en la tabla de los precios, así se podrá consultar los precios según la fecha de inicio, la fecha de finalización, la marca y el producto. Aquí se tiene el ejemplo de guardar la lista de los precios en la base de datos:
+  La clase `PricesService` tiene inyectado `PricesRepository`, `BrandsService`, `ProductsService`, `Brands` y `Products` en el constructor de la clase. Como en la clase anterior, se está usando la anotación `@PostConstruct` para que se guarden las marca y los productos en sus tablas correspondientes, y la lista de los precios en la tabla de los precios:
   
   ```java
   
@@ -146,6 +146,39 @@ Se ha usado diferentes tipos de json por cada caso para realizar los tests unita
                                 .collect(Collectors.toList()));
     }
   
+  ```
+  
+  Mediante esta clase se podrá consultar los precios según la fecha de inicio, la fecha de finalización, la marca y el producto. Aquí se tiene el ejemplo de guardar la lista de los precios en la base de datos mediante repositorio de JPA:
+  
+  ```java
+   public List<Prices> getPricesBetweenDatesAndBrandAndProduct(String startDate, String endDate, int brandId, int productId) throws ServiceException{
+
+        log.info(Constants.LOG_SERVICE, startDate, endDate, brandId, productId);
+
+        if (Objects.isNull(startDate) || startDate.isEmpty()) {
+            throw new ServiceException.Builder(String.valueOf(ServiceErrorCatalog.START_DATE_IS_NOT_CORRRECT))
+                    .withHttpStatus(HttpStatus.BAD_REQUEST).build();
+        }
+        if (Objects.isNull(endDate) || endDate.isEmpty()) {
+            throw new ServiceException.Builder(String.valueOf(ServiceErrorCatalog.END_DATE_IS_NOT_CORRRECT))
+                    .withHttpStatus(HttpStatus.BAD_REQUEST).build();
+        }
+
+        if (Objects.isNull(brandId)) {
+            throw new ServiceException.Builder(String.valueOf(ServiceErrorCatalog.BRAND_ID_IS_NOT_CORRRECT))
+                    .withHttpStatus(HttpStatus.BAD_REQUEST).build();
+        }
+
+        if (Objects.isNull(productId)) {
+            throw new ServiceException.Builder(String.valueOf(ServiceErrorCatalog.PRODUCT_ID_IS_NOT_CORRRECT))
+                    .withHttpStatus(HttpStatus.BAD_REQUEST).build();
+        }
+
+        LocalDateTime localStartDate = Utility.getLocalDateTimeFromString(startDate, Constants.FORMAT_DATE_TIME_YYYY_MM_DD_HH_MM_SS);
+        LocalDateTime localEndDate = Utility.getLocalDateTimeFromString(endDate, Constants.FORMAT_DATE_TIME_YYYY_MM_DD_HH_MM_SS);
+
+        return pricesRepository.findPricesByStartDateGreaterThanEqualAndEndDateLessThanEqualAndBrandAndProduct(localStartDate, localEndDate, brand, product);
+    }
   ```
   
 
