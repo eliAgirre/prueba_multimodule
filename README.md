@@ -31,14 +31,42 @@ Los ficheros json están en el módulo `web` en la carpeta `resources` y despué
 
 Se ha usado diferentes tipos de json por cada caso para realizar los tests unitarios en la parte del controlador.
 
-### Relaciones entre los módulos
+  ### Relaciones entre los módulos
 
-- **entity**: tiene dependencia de ningún módulo, ya que son las entidades de la lógica del dominio.
-- **domain**:
-  - Se relaciona con el módulo `entity`, ya que necesita las entidades de la lógica del dominio para el negocio.
-  - Depende del módulo `database` para que se puedan insertar y obtener los datos de una base de datos en memoria, que es la capa externa de la arquitectura hexagonal.
-- **database**: tiene la relación con el módulo `entity` para manejar los datos.
-- **web**: tiene dependencia con el módulo `domain` para el manejo del negocio y dar respuestas de las peticiones.
+  - **entity**: tiene dependencia de ningún módulo, ya que son las entidades de la lógica del dominio.
+  - **domain**:
+    - Se relaciona con el módulo `entity`, ya que necesita las entidades de la lógica del dominio para el negocio.
+    - Depende del módulo `database` para que se puedan insertar y obtener los datos de una base de datos en memoria, que es la capa externa de la arquitectura hexagonal.
+  - **database**: tiene la relación con el módulo `entity` para manejar los datos.
+  - **web**: tiene dependencia con el módulo `domain` para el manejo del negocio y dar respuestas de las peticiones.
+
+## Módulos
+  ### Entity
+  
+  Son las entidades de la lógica del dominio como `Prices`, `Brands` y `Products`. Además, se ha añadido la entidad `Error` para cuando se generan fallos como las excepciones.
+  
+  La entidad `Prices` contiene las anotaciones `@Entity`, `@Id`, `@ManyToOne` y `@JoinColumn` para la persistencia de datos en JPA. La anotación `@Entity` sirve para que la aplicación sepa que es una entidad y que debe crear la tabla según las propiedades que tenga la clase. La anotación `@Id` sirve para definir el id de la clase. La anotación `@ManyToOne` es una relación de mucho a uno (N:1) para que cree en la tabla esa relación con una id de otra entidad mediante la anotación `@JoinColumn`:
+  
+  ```java
+  public class Prices {
+  
+      @Id
+    private int priceId;
+    
+    @ManyToOne
+    @JoinColumn(name = "brand_id")
+    private Brands brand;
+  
+  }
+  ```
+  
+  
+  ### Domain
+  
+  ### Database
+  
+  ### Web
+
 
 ## Lista de dependencias
 
