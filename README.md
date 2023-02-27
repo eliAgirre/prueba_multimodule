@@ -31,7 +31,7 @@ Los ficheros json están en el módulo `web` en la carpeta `resources` y despué
 
   ### Relaciones entre los módulos
 
-  - **entity**: tiene dependencia de ningún módulo, ya que son las entidades de la lógica del dominio.
+  - **entity**: no tiene dependencia de ningún módulo, ya que son las entidades de la lógica del dominio.
   - **domain**:
     - Se relaciona con el módulo `entity`, ya que necesita las entidades de la lógica del dominio para el negocio.
     - Depende del módulo `database` para que se puedan insertar y obtener los datos de una base de datos en memoria, que es la capa externa de la arquitectura hexagonal.
