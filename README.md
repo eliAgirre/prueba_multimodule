@@ -213,6 +213,46 @@ Se ha usado diferentes tipos de json por cada caso para realizar los tests unita
   logging.level.web=DEBUG
   server.port=8082
   ```
+  
+  Dentro del módulo también está el controlador llamado `PricesController` con la anotación `@RestController`, `@RequestMapping`, `@Slf4j` y `@Validated`. Este controlador simplemente tiene inyectado el servicio de precios en el constructor y tiene un único endpoint para que se consulten los datos de los precios según los parámetros obtenidos de la petición:
+  
+  ```java
+  @Slf4j
+  @RestController
+  @RequestMapping(Constants.BASE_MAPPING)
+  @Validated
+  public class PricesController {
+  
+    private PricesService pricesService;
+
+    public PricesController(PricesService pricesService){
+        this.pricesService = pricesService;
+    }
+
+    @GetMapping(Constants.PATH_PRICES_FILTER_BY_DATES_BRAND_PRODUCT)
+    public ResponseEntity<List<Prices>> getPricesByDatesAndBrandAndProduct(
+            @NotBlank @RequestParam(value = "startDate") String startDate,
+            @NotBlank @RequestParam(value = "endDate") String endDate,
+            @RequestParam(value = "brandId") int brandId,
+            @RequestParam(value = "productId") int productId) throws ServiceException {
+
+        log.info(Constants.LOG_CONTROLLER, startDate, endDate, brandId, productId);
+
+        List<Prices> pricesList = null;
+
+        try {
+            pricesList = pricesService.getPricesBetweenDatesAndBrandAndProduct(startDate, endDate, brandId, productId);
+        }
+        catch (ServiceException e) {
+            throw new ServiceException(e.getCode(), e.getHttpStatus(), e.getMessage(), e.getCause(), e.getParams());
+        }
+
+        return ResponseEntity.ok(pricesList);
+    }
+  }
+  ```
+  
+  Según se figura en el código del controlador el endpoint puede lanzar una excepción de servicio o puede devolver una lista de precios, tanto vacía como rellena.
 
 
 ## Lista de dependencias
