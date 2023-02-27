@@ -70,15 +70,6 @@
                     </excludes>
                 </configuration>
             </plugin>
-
-            <plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <skipTests>${skip.unit.tests}</skipTests>
-                    <excludedGroups>integration</excludedGroups>
-                </configuration>
-            </plugin>
-
         </plugins>
     </build>
 
