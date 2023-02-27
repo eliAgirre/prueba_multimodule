@@ -181,9 +181,38 @@ Se ha usado diferentes tipos de json por cada caso para realizar los tests unita
     }
   ```
   
-
-  
   ### Web
+  
+  Este módulo contiene el empiece de la aplicación, los controladores y la configuración de la base de datos desde el fichero `application.properties`. En el `pom.xml` es donde se figura cuál es la clase principal:
+  ```xml
+    <properties>
+        <start-class>com.inditex.web.MainApplication</start-class>
+    </properties>
+  ```
+  
+  La configuración de la base de datos de H2 está en dentro de la carpeta `resources` en el fichero de `application.properties`:
+  
+  ```properties
+  spring.h2.console.enabled=true
+  spring.datasource.url=jdbc:h2:mem:test
+  spring.datasource.generate-unique-name=false
+  spring.datasource.driverClassName=org.h2.Driver
+  spring.datasource.username=sa
+  spring.datasource.password=password
+  spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+
+  # Resuelve el nombre de las columnas y de las tablas, no afecta a las relaciones
+  spring.jpa.hibernate.naming.physical-strategy=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+  DB_CLOSE_ON_EXIT=FALSE
+
+  spring.jpa.defer-datasource-initialization = true
+  # muestra los logs de sql
+  spring.jpa.show-sql = true
+
+
+  logging.level.web=DEBUG
+  server.port=8082
+  ```
 
 
 ## Lista de dependencias
