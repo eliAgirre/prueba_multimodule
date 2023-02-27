@@ -12,7 +12,7 @@ La arquitectura hexagonal tiene las siguientes capas:
 Este proyecto tiene la siguiente estructura:
 - **client**: es la capa cliente por ejemplo para usar las tablas, payments o shopping externos (en este caso no es necesario).
 - **authentication**: conecta todos los microservicios rest mediante un token, así es más seguro la comunicación (no es el caso, pero sería recomendable, se refuerza la seguridad).
-- **database**: se usa los repositorios jpa para realizar consultas a la base de datos en memoria h2.
+- **database**: se usan los repositorios jpa para realizar consultas a la base de datos en memoria h2.
 - **domain**: es la capa que se encarga de solucionar la lógica de negocio.
 - **entity**: son todas las entidades de la lógica del dominio.
 - **web**: es el starter, el servicio web y tiene la configuración de la base de datos h2 (application.properties).
@@ -36,7 +36,7 @@ Los ficheros json están en el módulo `web` en la carpeta `resources` y despué
     - Se relaciona con el módulo `entity`, ya que necesita las entidades de la lógica del dominio para el negocio.
     - Depende del módulo `database` para que se puedan insertar y obtener los datos de una base de datos en memoria, que es la ***capa de infraestructura*** de la arquitectura hexagonal.
   - **database**: tiene la relación con el módulo `entity` para manejar los datos.
-  - **web**: tiene dependencia con el módulo `domain` para el manejo del negocio y dar respuestas de las peticiones.
+  - **web**: tiene dependencia con el módulo `domain` para el manejo del negocio y dar respuestas a las peticiones.
 
 ## Módulos
   ### Entity
@@ -73,7 +73,7 @@ Los ficheros json están en el módulo `web` en la carpeta `resources` y despué
   }
   ```
   
-  La anotación transaccional proporciona la aplicación la capacidad de controlar declarativamente de las transacciones en beans o entidades, así como clases definidas.
+  La anotación transaccional proporciona a la aplicación la capacidad de controlar declarativamente las transacciones en beans o entidades, así como las clases definidas.
   
   Como se figura en el código se está realizando una consulta a la base de datos con una fecha de inicio, fecha de finalización, marca id y producto id. Esta consulta devuelve una lista de precios según los parámetros que vengan, siempre y cuando coincida que sea mayor o igual que la fecha de inicio, menor o igual que la fecha de finalización, y que coincidan tanto el id de marca como la del producto.
   
@@ -111,7 +111,7 @@ Los ficheros json están en el módulo `web` en la carpeta `resources` y despué
         return brandsRepository.save(brand);
     }
   ```
-  La clase `PricesService` tiene inyectado `PricesRepository`, `BrandsService`, `ProductsService`, `Brands` y `Products` en el constructor de la clase. Como en la clase anterior, se está usando la anotación `@PostConstruct` para que se guarden las marca y los productos en sus tablas correspondientes, y la lista de los precios en la tabla de los precios:
+  La clase `PricesService` tiene inyectado `PricesRepository`, `BrandsService`, `ProductsService`, `Brands` y `Products` en el constructor de la clase. Como en la clase anterior, se está usando la anotación `@PostConstruct` para que se guarden las marcas y los productos en sus tablas correspondientes, y la lista de los precios en la tabla de los precios:
   
   ```java
   
@@ -146,7 +146,7 @@ Los ficheros json están en el módulo `web` en la carpeta `resources` y despué
   
   ```
   
-  Mediante esta clase se podrá consultar los precios según la fecha de inicio, la fecha de finalización, la marca y el producto. Aquí se tiene el ejemplo de consultar la lista de los precios en la base de datos mediante repositorio de JPA:
+  Mediante esta clase se podrá consultar los precios según la fecha de inicio, la fecha de finalización, la marca y el producto. Aquí hay un ejemplo sobre cómo se consulta la lista de los precios en la base de datos mediante el repositorio de JPA:
   
   ```java
    public List<Prices> getPricesBetweenDatesAndBrandAndProduct(String startDate, String endDate, int brandId, int productId) throws ServiceException{
@@ -181,14 +181,14 @@ Los ficheros json están en el módulo `web` en la carpeta `resources` y despué
   
   ### Web
   
-  Este módulo contiene el empiece de la aplicación, los controladores y la configuración de la base de datos desde el fichero `application.properties`. En el `pom.xml` es donde se figura cuál es la clase principal:
+  Este módulo contiene el arranque de la aplicación, los controladores y la configuración de la base de datos desde el fichero `application.properties`. En el `pom.xml` es donde figura cuál es la clase principal:
   ```xml
     <properties>
         <start-class>com.inditex.web.MainApplication</start-class>
     </properties>
   ```
   
-  La configuración de la base de datos de H2 está en dentro de la carpeta `resources` en el fichero de `application.properties`:
+  La configuración de la base de datos de H2 está dentro de la carpeta `resources` en el fichero de `application.properties`:
   
   ```properties
   spring.h2.console.enabled=true
@@ -212,7 +212,7 @@ Los ficheros json están en el módulo `web` en la carpeta `resources` y despué
   server.port=8082
   ```
   
-  Dentro del módulo también está el controlador llamado `PricesController` con la anotación `@RestController`, `@RequestMapping`, `@Slf4j` y `@Validated`. Este controlador simplemente tiene inyectado el servicio de precios en el constructor y tiene un único endpoint para que se consulten los datos de los precios según los parámetros obtenidos de la petición:
+  Dentro del módulo también está el controlador llamado `PricesController` con la anotación `@RestController`, `@RequestMapping`, `@Slf4j` y `@Validated`. Este controlador simplemente tiene inyectado el servicio de los precios en el constructor, y tiene un único endpoint para que se consulten los datos de los precios según los parámetros obtenidos de la petición:
   
   ```java
   @Slf4j
@@ -347,7 +347,7 @@ En el caso del controlador se han utilizado los ficheros json cargados por cada 
   }
 ```
 
-En uno de los casos unitarios que se obtiene la petición y la respuesta de los ficheros json. Se comprueba si la respuesta no viene nula, si el cuerpo de la respuesta no viene nula, si devuelve el tamaño correspondiente de la lista y si los datos por cada lista las devuelve como es debido:
+En uno de los casos unitarios, se obtiene la petición y la respuesta de los ficheros json. Se comprueba si la respuesta no viene nula, si el cuerpo de la respuesta no viene nula, si devuelve el tamaño correspondiente de la lista y si los datos por cada lista las devuelve como es debido:
 
 ```java
     @Test
