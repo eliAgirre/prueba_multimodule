@@ -62,10 +62,28 @@ Se ha usado diferentes tipos de json por cada caso para realizar los tests unita
   ```
   Aparte de las anotaciones de JPA la clase `Prices` tiene las anotaciones de Lombok reducir el código repetitivo como `@Getter`, `@ToString`, `@RequiredArgsConstructor` y `@AllArgsConstructor`.
   
+  ### Database
+  
+  Se usa los repositorios JPA para realizar consultas a la base de datos en memoria h2. Se han creado los repositorios necesarios por cada entidad. En el caso del interfaz `PriceRepository` se extiende el repositorio JPA para utilizar la entidad `Prices`:
+  
+  ```java
+  @Repository
+  @Transactional
+  public interface PricesRepository extends JpaRepository<Prices, Integer> {
+  
+     List<Prices> findPricesByStartDateGreaterThanEqualAndEndDateLessThanEqualAndBrandAndProduct(LocalDateTime startDate, LocalDateTime endDate, Brands brand, Products product);
+  }
+  ```
+  
+  La anotación transaccional proporciona la aplicación la capacidad de controlar declarativamente de las transacciones en beans o entidades, así como clases definidas.
+  
+  Como se figura en el código se está realizando una consulta a la base de datos con una fecha de inicio, fecha de finalización, marca id y producto id. Esta consulta devuelve una lista de precios según los parámetros que vengan, siempre y cuando coincida que sea mayor o igual que la fecha de inicio, menor o igual que la fecha de finalización, y que coincidan tanto el id de marca como la del producto.
   
   ### Domain
   
-  ### Database
+  
+  
+
   
   ### Web
 
