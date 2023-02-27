@@ -81,7 +81,38 @@ Se ha usado diferentes tipos de json por cada caso para realizar los tests unita
   
   ### Domain
   
+  Se encarga de solucionar la lógica de negocio con los servicios necesarios por cada entidad. El módulo `domain` contiene los paquetes `services`, `exception` y `utils`.
   
+  En el paquete `services` se han creado los servicios necesarios por cada entidad. La clase `BrandsServices` tiene una anotación `@Service` y `@Slf4j`. La primera es para que Spring Boot sepa que es un servicio y la segunda sirve para ver los registros de los logs.
+  
+  Esta clase tiene una inyección de dependencias en el constructor del repositorio y la clase `Brands`:
+  
+  ```java
+  
+  @Slf4j
+  @Service
+  public class BrandsServices {
+  
+    private Brands brand;
+
+    private BrandsRepository brandsRepository;
+  
+      public BrandsServices(BrandsRepository brandsRepository, Brands brand){
+        this.brandsRepository = brandsRepository;
+        this.brand = brand;
+    }
+  }
+  ```
+  
+  La clase `BrandsService` contiene la anotación `@PostConstuct` para inicializar la tarea de guardar la marca mediante el repositorio inyectado en el constructor:
+  
+  ```java
+    @PostConstruct
+    public Brands initBrand(){
+        brand = generateBrand();
+        return brandsRepository.save(brand);
+    }
+  ```
   
 
   
