@@ -113,6 +113,40 @@ Se ha usado diferentes tipos de json por cada caso para realizar los tests unita
         return brandsRepository.save(brand);
     }
   ```
+  La clase `PricesService` tiene inyectado `PricesRepository`, `BrandsService`, `ProductsService`, `Brands` y `Products` en el constructor de la clase. Como en la clase anterior, se está usando la anotación `@PostConstruct` para que se guarden las marca y los productos en sus tablas correspondientes, y la lista de los precios en la tabla de los precios, así se podrá consultar los precios según la fecha de inicio, la fecha de finalización, la marca y el producto. Aquí se tiene el ejemplo de guardar la lista de los precios en la base de datos:
+  
+  ```java
+  
+    @PostConstruct
+    public void initPrices(){
+
+        brand = brandsServices.initBrand();
+        product = productsService.initProduct();
+
+        pricesRepository.saveAll(Stream.of(new Prices(1, brand,
+                                Utility.getLocalDateTimeFromString(Constants.START_DATE_STRING_1, Constants.FORMAT_DATE_TIME_YYYY_MM_DD_HH_MM_SS),
+                                Utility.getLocalDateTimeFromString(Constants.END_DATE_STRING_1, Constants.FORMAT_DATE_TIME_YYYY_MM_DD_HH_MM_SS),
+                                1, product, 0, 35.50, Constants.CURR),
+
+                                new Prices(2, brand,
+                                        Utility.getLocalDateTimeFromString(Constants.START_DATE_STRING_2, Constants.FORMAT_DATE_TIME_YYYY_MM_DD_HH_MM_SS),
+                                        Utility.getLocalDateTimeFromString(Constants.END_DATE_STRING_2, Constants.FORMAT_DATE_TIME_YYYY_MM_DD_HH_MM_SS),
+                                        2, product, 1, 25.45, Constants.CURR),
+
+                                new Prices(3, brand,
+                                        Utility.getLocalDateTimeFromString(Constants.START_DATE_STRING_3, Constants.FORMAT_DATE_TIME_YYYY_MM_DD_HH_MM_SS),
+                                        Utility.getLocalDateTimeFromString(Constants.END_DATE_STRING_3, Constants.FORMAT_DATE_TIME_YYYY_MM_DD_HH_MM_SS),
+                                        3, product, 1, 30.50, Constants.CURR),
+
+                                new Prices(4, brand,
+                                        Utility.getLocalDateTimeFromString(Constants.START_DATE_STRING_4, Constants.FORMAT_DATE_TIME_YYYY_MM_DD_HH_MM_SS),
+                                        Utility.getLocalDateTimeFromString(Constants.END_DATE_STRING_4, Constants.FORMAT_DATE_TIME_YYYY_MM_DD_HH_MM_SS),
+                                        4, product, 1, 38.95, Constants.CURR)
+                                )
+                                .collect(Collectors.toList()));
+    }
+  
+  ```
   
 
   
