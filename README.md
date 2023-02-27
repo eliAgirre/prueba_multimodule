@@ -401,18 +401,18 @@ Otro caso unitario es cuando la fecha de iniciación es vacía y lanza la excepc
 
 ## Lista de dependencias
 
-| Dependencia              |                                    Descripción                                            |
-|--------------------------|:-----------------------------------------------------------------------------------------:|
-| Spring Boot Starter Web  |                             Arranque de la aplicación                                     |
-| Spring Boot Starter JPA  | Persiste datos en almacenes SQL con Java Persistence API mediante Spring Data e Hibernate |
-| Spring Boot DevTools     |                   Herramienta de desarrollo como ver los logs.                            |
-| Spring Boot Starter Test |                          Se realizan los test unitarios                                   |
-| H2                       |                             Base de datos en memoria                                      |
-| Lombok                   |      Biblioteca de anotaciones Java que ayuda a reducir el código repetitivo              |
-| Jackson Datatype Joda    |  Instancia de ObjectMapper para serializar respuestas y deserializar solicitudes          |
-| Jackson Datatype Jsr310  |          Ofrece una forma sencilla e intuitiva de crear un ObjectMapper                   |
-| Jackson Databind         | Biblioteca de utilidades para ayudar con el desarrollo de la funcionalidad de E/S         |
-| Common io                |  Convierte JSON a objetos y admite una fácil conversión a Map desde datos JSON.           |
+| Dependencia              |                                    Descripción                                             |
+|--------------------------|:------------------------------------------------------------------------------------------:|
+| Spring Boot Starter Web  |                             Arranque de la aplicación                                      |
+| Spring Boot Starter JPA  | Persiste datos en almacenes SQL con Java Persistence API mediante Spring Data e Hibernate. |
+| Spring Boot DevTools     |                   Herramienta de desarrollo como ver los logs.                             |
+| Spring Boot Starter Test |                          Se realizan los test unitarios.                                   |
+| H2                       |                             Base de datos en memoria.                                      |
+| Lombok                   |      Biblioteca de anotaciones Java que ayuda a reducir el código repetitivo.              |
+| Jackson Datatype Joda    |  Instancia de ObjectMapper para serializar respuestas y deserializar solicitudes.          |
+| Jackson Datatype Jsr310  |          Ofrece una forma sencilla e intuitiva de crear un ObjectMapper.                   |
+| Jackson Databind         | Biblioteca de utilidades para ayudar con el desarrollo de la funcionalidad de E/S.         |
+| Common io                |  Convierte JSON a objetos y admite una fácil conversión a Map desde datos JSON.            |
 
 
 
