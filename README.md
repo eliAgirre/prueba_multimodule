@@ -253,6 +253,28 @@ Se ha usado diferentes tipos de json por cada caso para realizar los tests unita
   ```
   
   Según se figura en el código del controlador el endpoint puede lanzar una excepción de servicio o puede devolver una lista de precios, tanto vacía como rellena.
+  
+## Tests con Mockito
+
+Se han creado los tests para las clases `PricesService` y `PricesController`. Se ha usado para realizar los tests `junit.jupiter` y `mockito`.
+
+En el caso de `PricesServiceTest` se ha creado un método llamado `setUp` para mockear las clases que se instancian en el servicio como `PricesRepository`, `BrandsService`, `ProductsService`, `Brands`, `Products` y `ServiceException`:
+
+```java
+    @BeforeEach
+    public void setUp() {
+
+        mockedPricesRepository = mock(PricesRepository.class);
+        mockedBrandsServices = mock(BrandsServices.class);
+        mockedProductsService = mock(ProductsService.class);
+        mockedBrand = mock(Brands.class);
+        mockedProduct = mock(Products.class);
+        mockedPricesService = new PricesService(mockedPricesRepository, mockedBrandsServices, mockedProductsService, mockedBrand, mockedProduct);
+        mockedServiceException = getServiceExceptionByErrorCodeAndStatus(ServiceErrorCatalog.START_DATE_IS_NOT_CORRRECT.name(),
+                HttpStatus.INTERNAL_SERVER_ERROR, ServiceErrorCatalog.START_DATE_IS_NOT_CORRRECT.getMessage());
+
+    }
+```
 
 
 ## Lista de dependencias
