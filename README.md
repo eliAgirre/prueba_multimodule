@@ -297,7 +297,7 @@ Ejemplo de un caso unitario cuando la fecha de inicio, la fecha de finalización
     }
 ```
 
-Otro caso de uso cuando la fecha de inicio sea vacío:
+Otro caso de uso es cuando la fecha de inicio sea vacío:
 
 ```java
     @Test
