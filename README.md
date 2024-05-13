@@ -10,7 +10,7 @@ La arquitectura hexagonal tiene las siguientes capas:
 ## Estructura y/o módulos
 
 Este proyecto tiene la siguiente estructura:
-- **client**: es la capa cliente por ejemplo para usar las tablas, payments o shopping externos (en este caso no es necesario).
+- **client**: es la capa cliente por ejemplo para usar las tablas, payments o shopping externo (en este caso no es necesario).
 - **authentication**: conecta todos los microservicios rest mediante un token, así es más seguro la comunicación (no es el caso, pero sería recomendable, se refuerza la seguridad).
 - **database**: se usan los repositorios jpa para realizar consultas a la base de datos en memoria h2.
 - **domain**: es la capa que se encarga de solucionar la lógica de negocio.
@@ -43,7 +43,7 @@ Los ficheros json están en el módulo `web` en la carpeta `resources` y despué
   
   Son las entidades de la lógica del dominio como `Prices`, `Brands` y `Products`. Además, se ha añadido la entidad `Error` para cuando se generan fallos como las excepciones.
   
-  La entidad `Prices` contiene las anotaciones `@Entity`, `@Id`, `@ManyToOne` y `@JoinColumn` para la persistencia de datos en JPA. La anotación `@Entity` sirve para que la aplicación sepa que es una entidad y que debe crear la tabla según las propiedades que tenga la clase. La anotación `@Id` sirve para definir el id de la clase. La anotación `@ManyToOne` es una relación de mucho a uno (N:1) para que cree en la tabla esa relación con una id de otra entidad mediante la anotación `@JoinColumn`:
+  La entidad `Prices` contiene las anotaciones `@Entity`, `@Id`, `@ManyToOne` y `@JoinColumn` para la persistencia de datos en JPA. La anotación `@Entity` sirve para que la aplicación sepa que es una entidad y que debe crear la tabla según las propiedades que tenga la clase. La anotación `@Id` sirve para definir el identificador de la clase. La anotación `@ManyToOne` es una relación de mucho a uno (N:1) para que cree en la tabla esa relación con una `id` de otra entidad mediante la anotación `@JoinColumn`:
   
   ```java
   @Entity
@@ -62,7 +62,7 @@ Los ficheros json están en el módulo `web` en la carpeta `resources` y despué
   
   ### Database
   
-  Se usa los repositorios JPA para realizar consultas a la base de datos en memoria h2. Se han creado los repositorios necesarios por cada entidad. En el caso del interfaz `PriceRepository` se extiende el repositorio JPA para utilizar la entidad `Prices`:
+  Se usa los repositorios JPA para realizar consultas a la base de datos en memoria h2. Se han creado los repositorios necesarios por cada entidad. En el caso de la interfaz `PriceRepository` se extiende el repositorio JPA para utilizar la entidad `Prices`:
   
   ```java
   @Repository
@@ -75,7 +75,7 @@ Los ficheros json están en el módulo `web` en la carpeta `resources` y despué
   
   La anotación transaccional proporciona a la aplicación la capacidad de controlar declarativamente las transacciones en beans o entidades, así como las clases definidas.
   
-  Como se figura en el código se está realizando una consulta a la base de datos con una fecha de inicio, fecha de finalización, marca id y producto id. Esta consulta devuelve una lista de precios según los parámetros que vengan, siempre y cuando coincida que sea mayor o igual que la fecha de inicio, menor o igual que la fecha de finalización, y que coincidan tanto el id de marca como la del producto.
+  Como se figura en el código se está realizando una consulta a la base de datos con una fecha de inicio, fecha de finalización, marca id y producto id. Esta consulta devuelve una lista de precios según los parámetros que vengan, siempre y cuando coincida que sea mayor o igual que la fecha de inicio, menor o igual que la fecha de finalización, y que coincidan tanto el identificador de marca como la del producto.
   
   ### Domain
   
@@ -181,7 +181,7 @@ Los ficheros json están en el módulo `web` en la carpeta `resources` y despué
   
   ### Web
   
-  Este módulo contiene el arranque de la aplicación, los controladores y la configuración de la base de datos desde el fichero `application.properties`. En el `pom.xml` es donde figura cuál es la clase principal:
+  Este módulo contiene el arranque de la aplicación, los controladores y la configuración de la base de datos desde el fichero `application.properties`. En el fichero `pom.xml` es donde figura cuál es la clase principal:
   ```xml
     <properties>
         <start-class>com.inditex.web.MainApplication</start-class>
@@ -350,33 +350,35 @@ En el caso del controlador se han utilizado los ficheros json cargados por cada 
 En uno de los casos unitarios, se obtiene la petición y la respuesta de los ficheros json. Se comprueba si la respuesta no viene nula, si el cuerpo de la respuesta no viene nula, si devuelve el tamaño correspondiente de la lista y si los datos por cada lista las devuelve como es debido:
 
 ```java
-    @Test
-    void Test1_Given_StartDateAt10Date14AndEndDateAndBrandAndProduct_When_getPrices_Then_returns_PricesList() throws Exception {
-        System.out.println(Constants.LOG_CONTROLLER_TEST1);
-        // Given
-        PriceRqTest rq1 = json.test1PriceRqAt10Date14();
-        List<Prices> rsList1 = json.test1PriceRsAt10Date14();
-
-        // When
-        when(mockedPricesService.getPricesBetweenDatesAndBrandAndProduct(rq1.getStartDate(), rq1.getEndDate(),
-                                                            rq1.getBrandId(), rq1.getProductId())).thenReturn(rsList1);
-
-        ResponseEntity<List<Prices>> responseEntity = pricesController.getPricesByDatesAndBrandAndProduct(rq1.getStartDate(),
-                                                            rq1.getEndDate(), rq1.getBrandId(), rq1.getProductId());
-        responseEntity.getBody().stream()
-                .map( price -> price.toString() )
-                .forEach(System.out::println);
-        System.out.println();
-
-        // Then
-        assertNotNull(responseEntity);
-        assertNotNull(responseEntity.getBody());
-        assertEquals(rsList1.size(), responseEntity.getBody().size());
-        assertEquals(rsList1.get(0), responseEntity.getBody().get(0));
-        assertEquals(rsList1.get(1), responseEntity.getBody().get(1));
-        assertEquals(rsList1.get(2), responseEntity.getBody().get(2));
-        assertEquals(rsList1.get(3), responseEntity.getBody().get(3));
-        System.out.println();
+    public class PricesControllerTest {
+        @Test
+        void Test1_Given_StartDateAt10Date14AndEndDateAndBrandAndProduct_When_getPrices_Then_returns_PricesList() throws Exception {
+            System.out.println(Constants.LOG_CONTROLLER_TEST1);
+            // Given
+            PriceRqTest rq1 = json.test1PriceRqAt10Date14();
+            List<Prices> rsList1 = json.test1PriceRsAt10Date14();
+    
+            // When
+            when(mockedPricesService.getPricesBetweenDatesAndBrandAndProduct(rq1.getStartDate(), rq1.getEndDate(),
+                    rq1.getBrandId(), rq1.getProductId())).thenReturn(rsList1);
+    
+            ResponseEntity<List<Prices>> responseEntity = pricesController.getPricesByDatesAndBrandAndProduct(rq1.getStartDate(),
+                    rq1.getEndDate(), rq1.getBrandId(), rq1.getProductId());
+            responseEntity.getBody().stream()
+                    .map(price -> price.toString())
+                    .forEach(System.out::println);
+            System.out.println();
+    
+            // Then
+            assertNotNull(responseEntity);
+            assertNotNull(responseEntity.getBody());
+            assertEquals(rsList1.size(), responseEntity.getBody().size());
+            assertEquals(rsList1.get(0), responseEntity.getBody().get(0));
+            assertEquals(rsList1.get(1), responseEntity.getBody().get(1));
+            assertEquals(rsList1.get(2), responseEntity.getBody().get(2));
+            assertEquals(rsList1.get(3), responseEntity.getBody().get(3));
+            System.out.println();
+        }
     }
 ```
 

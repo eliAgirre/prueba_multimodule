@@ -1,14 +1,8 @@
 
-w
-Gtest-inditex-web/src/main/java/com/inditex/model/response/PricesRs.java,c\a\cacfa5389f8cbbd46c1a53e442c28ac0b65d3526
-v
-Ftest-inditex-web/src/main/java/com/inditex/model/response/PriceRs.java,7\c\7cb03eda8fa9701693d9a0618c7c5ba2e0e16976
 K
 test-inditex-entity/pom.xml,4\4\4462c1f65cdd6ef6fffbd8775e69548aa4d40292
 7
 pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
-O
-Pruebas.postman_collection.json,9\f\9fb155390f56755e1dfd23026626686a0f70ae92
 x
 Htest-inditex-web/src/test/java/com/inditex/BaseJsonToObjectsCreator.java,e\8\e8690b345d1c9e6dcf05c590d537e1b781499f5b
 H
